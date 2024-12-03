@@ -1,0 +1,5 @@
+# environment
+venv
+
+# others
+ollama_chat.py
