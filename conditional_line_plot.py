@@ -4,6 +4,16 @@ import pandas as pd
 
 
 def DisplayPlot(df):
+    if df["month"].dtype == "object":
+        df["month"] = (
+            pd.Categorical(
+                df["month"],
+                categories=["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                ordered=True,
+            ).codes
+            + 1
+        )
+
     month = df["month"]
     col1 = df["col1"]
     col2 = df["col2"]
@@ -156,38 +166,44 @@ st.write(
 )
 
 datasets = {
+    "Actual Dataset": {
+        "month": ["Jan", "Feb", "Mar", "Apr", "May"],
+        "col1": [0.1555, 0.1097, 0.1459, 0.2804, 0.267],
+        "col2": [0.1256, 0.119, 0.175, 0.2634, 0.1855],
+        "col3": [0.1863, 0.1863, 0.1863, 0.1863, 0.1863],
+    },
     "No Crossing": {
-        "month": [1, 2, 3, 4, 5],
+        "month": ["Jan", "Feb", "Mar", "Apr", "May"],
         "col1": [10, 15, 20, 25, 30],
         "col2": [5, 10, 15, 20, 25],
         "col3": [7, 12, 17, 22, 27],
     },
     "Single Crossing": {
-        "month": [1, 2, 3, 4, 5],
+        "month": ["Jan", "Feb", "Mar", "Apr", "May"],
         "col1": [10, 20, 15, 25, 30],
         "col2": [5, 15, 20, 10, 25],
         "col3": [7, 12, 17, 22, 27],
     },
     "Multiple Crossings": {
-        "month": [1, 2, 3, 4, 5],
+        "month": ["Jan", "Feb", "Mar", "Apr", "May"],
         "col1": [10, 20, 10, 30, 15],
         "col2": [5, 15, 25, 10, 20],
         "col3": [7, 12, 17, 22, 27],
     },
     "Flat Segments": {
-        "month": [1, 2, 3, 4, 5],
+        "month": ["Jan", "Feb", "Mar", "Apr", "May"],
         "col1": [10, 15, 15, 20, 25],
         "col2": [5, 15, 15, 10, 20],
         "col3": [7, 12, 17, 22, 27],
     },
     "Zigzagging Lines": {
-        "month": [1, 2, 3, 4, 5, 6],
+        "month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
         "col1": [10, 20, 15, 25, 20, 30],
         "col2": [5, 15, 20, 10, 25, 15],
         "col3": [7, 12, 17, 22, 27, 32],
     },
     "Extreme Differences": {
-        "month": [1, 2, 3, 4, 5],
+        "month": ["Jan", "Feb", "Mar", "Apr", "May"],
         "col1": [50, 60, 70, 80, 90],
         "col2": [10, 20, 30, 40, 50],
         "col3": [7, 12, 17, 22, 27],
