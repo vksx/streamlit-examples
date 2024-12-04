@@ -150,9 +150,15 @@ def DisplayPlot(df):
                         )
                     )
 
+    month_mapping = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun"}
+
     fig.update_layout(
         title=dict(text="Comparison of col1 and col2"),
-        xaxis=dict(title=dict(text="Month")),
+        xaxis=dict(
+            title=dict(text="Month"),
+            tickvals=list(month_mapping.keys()),
+            ticktext=list(month_mapping.values()),
+        ),
         yaxis=dict(title=dict(text="Values")),
         showlegend=True,
     )
